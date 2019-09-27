@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infinova.depr.dao.ProductDao">
+    <select id="getProductByParams" resultType="com.infinova.depr.entity.Product">
+        SELECT
+        product_id,
+        product_name,
+        product_num,
+        product_designation,
+        product_type,
+        product_describe,
+        product_state,
+        product_manager_id,
+        product_manager_name,
+        product_line_id,
+        product_line_name
+        FROM
+        product
+        where 1=1
+        <if test="productName!=null and productName.length!=0">
+            AND product_name like concat('%',#{productName},'%')
+        </if>
+        <if test="productState!=null">
+            AND product_state = #{productState}
+        </if>
+        <if test="productType!=null">
+            AND product_type = #{productType}
+        </if>
+        <if test="productLineId!=null and productLineId.length!=0">
+            AND product_line_id = #{productLineId}
+        </if>
+    </select>
+    <select id="getProductCount" resultType="Integer">
+        SELECT
+        count(product_id)
+        FROM
+        product
+        where 1=1
+        <if test="productName!=null and productName.length!=0">
+            AND product_name like concat('%',#{productName},'%')
+        </if>
+        <if test="productState!=null">
+            AND product_state = #{productState}
+        </if>
+        <if test="productType!=null">
+            AND product_type = #{productType}
+        </if>
+        <if test="productLineId!=null and productLineId.length!=0">
+            AND product_line_id = #{productLineId}
+        </if>
+    </select>
+    <select id="getProductIdAndNameByParams" resultType="com.infinova.depr.entity.ProductIdAndName">
+        SELECT
+        product_id,
+        product_name
+        FROM
+        product
+        where 1=1
+        <if test="productName!=null and productName.length!=0">
+            AND product_name like concat('%',#{productName},'%')
+        </if>
+        <if test="productState!=null">
+            AND product_state != #{productState}
+        </if>
+        <if test="productLineIds!=null and productLineIds.length!=0">
+            AND product_line_id in
+            <foreach collection="productLineIds" item="productLineId" open="(" close=")" separator=",">
+                #{productLineId}
+            </foreach>
+        </if>
+    </select>
+</mapper>

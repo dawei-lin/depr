@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infinova.depr.dao.OverallDesignPictureDao">
+    <insert id="saveOverallDesignPictureList" parameterType="com.infinova.depr.entity.OverallDesignPicture">
+        insert into
+        overall_design_picture(overall_design_picture_id,overall_design_picture_context,
+        overall_design_rule_id)
+        values
+        <foreach collection="list" item="overallDesignPicture" separator=",">
+            (replace(uuid(),'-',''),#{overallDesignPicture.overallDesignPictureContext},
+            #{overallDesignPicture.overallDesignRuleId})
+        </foreach>
+    </insert>
+</mapper>

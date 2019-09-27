@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infinova.depr.dao.DemandDao">
+    <select id="getDemandListByParams" resultType="com.infinova.depr.entity.Demand">
+        SELECT
+        d.demand_id demand_id,
+        d.demand_name demand_name,
+        d.demand_num demand_num,
+        d.demand_category_id demand_category_id,
+        d.demand_child_category_id demand_child_category_id,
+        d.demand_resume demand_resume,
+        d.demand_describe demand_describe,
+        d.demand_priority demand_priority,
+        d.demand_accept_criteria demand_accept_criteria,
+        d.demand_remarks demand_remarks,
+        d.product_id product_id,
+        d.demand_state demand_state,
+        d.demand_origin demand_origin,
+        dc.demand_category_name demand_category_name
+        FROM
+        demand d inner join demand_category dc
+        on d.demand_category_id=dc.demand_category_id
+        where 1=1
+        <if test="demandName!=null and demandName.length!=0">
+            AND d.demand_name like concat('%',#{demandName},'%')
+        </if>
+        <if test="demandPriority!=null">
+            AND d.demand_priority = #{demandPriority}
+        </if>
+        <if test="demandState!=null">
+            AND d.demand_state = #{demandState}
+        </if>
+        <if test="productId!=null and productId.length!=0">
+            AND d.product_id = #{productId}
+        </if>
+    </select>
+    <select id="getAllDemand" resultType="com.infinova.depr.entity.Demand">
+        SELECT
+        d.demand_id demand_id,
+        d.demand_name demand_name,
+        d.demand_num demand_num,
+        d.demand_category_id demand_category_id,
+        d.demand_child_category_id demand_child_category_id,
+        d.demand_resume demand_resume,
+        d.demand_describe demand_describe,
+        d.demand_priority demand_priority,
+        d.demand_accept_criteria demand_accept_criteria,
+        d.demand_remarks demand_remarks,
+        d.product_id product_id,
+        d.demand_state demand_state,
+        d.demand_origin demand_origin,
+        d.is_core is_core,
+        d.realize_edition realize_edition,
+        d.norms_num norms_num,
+        d.demand_origin demand_origin,
+        d.demand_resume demand_resume,
+        d.demand_accept_criteria demand_accept_criteria,
+        d.overall_design_rule_num overall_design_rule_num,
+        dc.demand_category_name demand_category_name,
+		dcc.demand_category_name demandc_child_category_name
+        FROM
+        demand d inner join demand_category dc
+        on d.demand_category_id=dc.demand_category_id
+		left join demand_category dcc
+		on d.demand_child_category_id=dcc.demand_category_id
+		where d.product_id=#{productId}
+    </select>
+
+    <select id="getParentMaxOrder" resultType="String">
+        select max(demand_order)
+        from demand
+        where demand_category_id=#{demandCategoryId}
+        <if test="demandChildCategoryId!=null and demandChildCategoryId.length!=0">
+            AND demand_child_category_id=#{demandChildCategoryId}
+        </if>
+    </select>
+    <insert id="saveDemandList" parameterType="com.infinova.depr.entity.Demand">
+        insert into demand(demand_id,demand_name,demand_num,demand_category_id,
+        demand_child_category_id,demand_resume,demand_describe,demand_priority,
+        demand_accept_criteria,demand_remarks,product_id,demand_origin,
+        demand_order,is_core,realize_edition,norms_num,overall_design_rule_num)
+        values
+        <foreach collection="list" item="demand" separator=",">
+            (replace(uuid(),'-',''),#{demand.demandName},#{demand.demandNum},#{demand.demandCategoryId},
+            #{demand.demandChildCategoryId},#{demand.demandResume},#{demand.demandDescribe},#{demand.demandPriority},
+            #{demand.demandAcceptCriteria},#{demand.demandRemarks},#{demand.productId},#{demand.demandOrigin},
+            #{demand.demandOrder},#{demand.isCore},#{demand.realizeEdition},#{demand.normsNum},#{demand.overallDesignRuleNum})
+        </foreach>
+    </insert>
+    <select id="getDemandMatrixListByParams" resultType="com.infinova.depr.entity.DemandMatrix">
+        SELECT
+        d.demand_num demand_num,
+        d.demand_state demand_state,
+        d.demand_priority demand_priority,
+        d.norms_num norms_num,
+        d.overall_design_rule_num overall_design_rule_num,
+        dc.demand_category_name demand_category_name
+        FROM
+        demand d inner join demand_category dc
+        on d.demand_category_id=dc.demand_category_id
+        where 1=1
+        <if test="demandNum!=null and demandNum.length!=0">
+            AND d.demand_num like concat('%',#{demandNum},'%')
+        </if>
+        <if test="demandPriority!=null">
+            AND d.demand_priority = #{demandPriority}
+        </if>
+        <if test="demandState!=null">
+            AND d.demand_state = #{demandState}
+        </if>
+        <if test="productId!=null and productId.length!=0">
+            AND d.product_id = #{productId}
+        </if>
+    </select>
+    <select id="getParentMaxOrderByProductId" resultType="String">
+        select max(demand_order)
+        from demand
+        where demand_category_id=#{demandCategoryId}
+        and product_id=#{productId}
+        <if test="demandChildCategoryId!=null and demandChildCategoryId.length!=0">
+            AND demand_child_category_id=#{demandChildCategoryId}
+        </if>
+    </select>
+
+    <select id="getDemandIdByIds" resultType="String">
+        select demand_id
+        from demand
+        where demand_category_id=#{demandCategoryId}
+        and demand_id=#{demandId}
+        <if test="demandChildCategoryId!=null and demandChildCategoryId.length!=0">
+            AND demand_child_category_id=#{demandChildCategoryId}
+        </if>
+    </select>
+    <update id="updateDemandNumList" parameterType="com.infinova.depr.entity.Demand">
+        <foreach collection="list" item="demand" separator=";">
+            update demand set demand_num=#{demand.demandNum},demand_order=#{demand.demandOrder} where
+            demand_id=#{demand.demandId}
+        </foreach>
+    </update>
+    <select id="getDemandListByDemandNum" resultType="com.infinova.depr.entity.Demand">
+        select demand_id,demand_num
+        from demand
+        where demand_num>#{demandNum}
+        and demand_category_id=#{demandCategoryId}
+        and product_id=#{productId}
+        <if test="demandChildCategoryId!=null and demandChildCategoryId.length!=0">
+            AND demand_child_category_id=#{demandChildCategoryId}
+        </if>
+    </select>
+</mapper>

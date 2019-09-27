@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infinova.depr.dao.OverallDesignRuleDao">
+    <insert id="saveOverallDesignRuleList" parameterType="com.infinova.depr.entity.OverallDesignRule">
+        insert into
+        overall_design_rule(overall_design_rule_id,overall_design_rule_name,overall_design_rule_num,
+        overall_design_rule_context,product_id,pdf_page)
+        values
+        <foreach collection="list" item="overallDesignRule" separator=",">
+            (replace(uuid(),'-',''),#{overallDesignRule.overallDesignRuleName},#{overallDesignRule.overallDesignRuleNum},
+            #{overallDesignRule.overallDesignRuleContext},#{overallDesignRule.productId},#{overallDesignRule.pdfPage})
+        </foreach>
+    </insert>
+    <select id="getOverallDesignRuleList" resultType="com.infinova.depr.entity.OverallDesignRule">
+        SELECT
+        *
+        FROM
+        overall_design_rule
+        where 1=1
+        <if test="list!=null and list.size()!=0">
+            AND overall_design_rule_id in
+            <foreach collection="list" item="overallDesignRuleId" open="(" close=")" separator=",">
+                #{overallDesignRuleId}
+            </foreach>
+        </if>
+    </select>
+</mapper>

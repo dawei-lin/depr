@@ -1,0 +1,40 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /depr
+spring:
+  profiles:
+    active: dev #默认为开发环境
+  application:
+    name: depr-service
+  servlet:
+    multipart:
+      maxRequestSize: 30MB
+      maxFileSize: 30MB
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:com/**/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  config: classpath:log4j2.xml
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://10.82.13.173:8001/eureka
+feign.hystrix.enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds=1000:
+cron: 0 0 0 * * ?
+file:
+  store:
+    commonPath: C:/depr/files

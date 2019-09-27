@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infinova.depr.dao.NormsDao">
+    <insert id="saveNormsList" parameterType="com.infinova.depr.entity.Norms">
+        insert into
+        norms(norms_id,norms_num,norms_name,norms_describe,norms_event,
+        norms_baseflow,norms_extflow,norms_excflow,norms_precondition,
+        norms_postcondition,norms_rule,norms_other,norms_user,product_id,pdf_page,norms_version)
+        values
+        <foreach collection="list" item="norms" separator=",">
+            (replace(uuid(),'-',''),#{norms.normsNum},#{norms.normsName},
+            #{norms.normsDescribe},#{norms.normsEvent},#{norms.normsBaseflow},
+            #{norms.normsExtflow},#{norms.normsExcflow},#{norms.normsPrecondition},
+            #{norms.normsPostcondition},#{norms.normsRule},#{norms.normsOther},
+            #{norms.normsUser},#{norms.productId},#{norms.pdfPage},#{norms.normsVersion})
+        </foreach>
+    </insert>
+    <select id="getNormsList" resultType="com.infinova.depr.entity.Norms">
+        SELECT
+        *
+        FROM
+        norms
+        where 1=1
+        <if test="list!=null and list.size()!=0">
+            AND norms_id in
+            <foreach collection="list" item="normsId" open="(" close=")" separator=",">
+                #{normsId}
+            </foreach>
+        </if>
+    </select>
+</mapper>
