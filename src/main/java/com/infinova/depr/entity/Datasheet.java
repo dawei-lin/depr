@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/1 10:52
  */
 public class Datasheet implements Serializable {
+    private static final long serialVersionUID = 4542329613661005987L;
     private String datasheetId;
     private String datasheetUrl;
     private String productId;

@@ -9,6 +9,7 @@ import java.util.List;
  * @date 2019/8/26 11:37
  */
 public class Dept implements Serializable {
+    private static final long serialVersionUID = 8671387672322284436L;
     private Integer id;
     private String departmentName;
     private String departmentCode;

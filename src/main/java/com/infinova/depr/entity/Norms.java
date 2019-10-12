@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/2 10:35
  */
 public class Norms implements Serializable {
+    private static final long serialVersionUID = -7319027487510760814L;
     private String normsId;
     private String normsNum;
     private String normsDescribe;

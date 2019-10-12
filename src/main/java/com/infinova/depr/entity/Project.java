@@ -15,6 +15,7 @@ import java.util.Date;
  */
 @ApiModel
 public class Project implements Serializable {
+    private static final long serialVersionUID = 7640044357077860763L;
     @ApiModelProperty("项目id")
     private String projectId;
     @ApiModelProperty("项目名字")

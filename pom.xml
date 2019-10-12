@@ -179,13 +179,6 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.5</version>
         </dependency>
-
-        <!-- 添加PageOffice依赖（必须） -->
-        <dependency>
-            <groupId>com.zhuozhengsoft</groupId>
-            <artifactId>pageoffice</artifactId>
-            <version>4.5.0.10</version>
-        </dependency>
         <!-- pdfbox-->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>

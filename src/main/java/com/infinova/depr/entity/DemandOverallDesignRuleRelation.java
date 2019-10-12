@@ -8,6 +8,7 @@ import java.util.Objects;
  * @date 2019/9/5 19:11
  */
 public class DemandOverallDesignRuleRelation implements Serializable {
+    private static final long serialVersionUID = 7365737663543583546L;
     private String demandId;
     private String overallDesignRuleId;
 

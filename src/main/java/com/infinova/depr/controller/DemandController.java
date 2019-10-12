@@ -84,6 +84,11 @@ public class DemandController {
     @PutMapping()
     @ApiOperation("更新需求")
     public CommonResult updateDemand(@Valid @RequestBody Demand demand) {
+        if (demand != null && StringUtils.isNotEmpty(demand.getDemandName()) && StringUtils.isNotEmpty(demand.getDemandChildCategoryName())) {
+            if (!demand.getDemandName().equals(demand.getDemandChildCategoryName())) {
+                return new CommonResult(ReturnCodeType.DEMAND_NAME_ERROR.getStringCode(), ReturnCodeType.DEMAND_NAME_ERROR.getDesc());
+            }
+        }
         if (demand != null && StringUtils.isNotEmpty(demand.getNormsNum()) && StringUtils.isNotEmpty(demand.getProductId())) {
             String info = normsService.checkNormsNum(demand.getNormsNum(), demand.getProductId());
             if (StringUtils.isNotEmpty(info)) {

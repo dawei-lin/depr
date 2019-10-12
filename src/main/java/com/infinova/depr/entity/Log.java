@@ -8,6 +8,7 @@ import java.util.Date;
  * @date 2019/9/9 15:37
  */
 public class Log implements Serializable {
+    private static final long serialVersionUID = 4027941640834318950L;
     private String logId;
     private String logName;
     private String logContent;

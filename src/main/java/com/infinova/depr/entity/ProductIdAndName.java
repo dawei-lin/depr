@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/7/20 10:15
  */
 public class ProductIdAndName implements Serializable {
+    private static final long serialVersionUID = 4160233028143302700L;
     private String productId;
     private String productName;
 

@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/14 10:38
  */
 public class Regulation implements Serializable {
+    private static final long serialVersionUID = 5373301444552596514L;
     private String regulationId;
     private String regulationName;
     private Boolean tick;

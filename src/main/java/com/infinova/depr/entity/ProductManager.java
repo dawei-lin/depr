@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @ApiModel("产品负责人")
 public class ProductManager implements Serializable {
+    private static final long serialVersionUID = 5750030613835660138L;
     @ApiModelProperty("产品负责人id")
     @NotNull
     @Length(min = 32, max = 32)

@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/5 17:05
  */
 public class OverallDesign implements Serializable {
+    private static final long serialVersionUID = 1316474956974922222L;
     private String overallDesignId;
     private String ovarallDesignUrl;
     private String productId;

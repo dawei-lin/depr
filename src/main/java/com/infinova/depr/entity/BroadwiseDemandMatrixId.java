@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/14 11:13
  */
 public class BroadwiseDemandMatrixId implements Serializable {
+    private static final long serialVersionUID = 338790616072653797L;
     private String achieveStageId;
     private String[] regulationIds;
     private String regulationId;

@@ -8,6 +8,7 @@ import java.util.List;
  * @date 2019/8/14 10:35
  */
 public class BroadwiseDemandMatrix implements Serializable {
+    private static final long serialVersionUID = -2657114017221088447L;
     private String achieveStageId;
     private String achieveStageName;
     private List<Regulation> regulationList;

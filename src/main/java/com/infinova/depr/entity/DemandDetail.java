@@ -8,6 +8,7 @@ import java.util.List;
  * @date 2019/8/13 14:30
  */
 public class DemandDetail implements Serializable {
+    private static final long serialVersionUID = -4180726433424488421L;
     private Demand demand;
     private List<Norms> normsList;
     private List<OverallDesignRule> overallDesignRuleList;

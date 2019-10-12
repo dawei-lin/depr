@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/7/19 11:20
  */
 public class ProductParam extends BaseParam implements Serializable {
+    private static final long serialVersionUID = -800376611180051116L;
     private String productName;
     private Integer productType;
     private Integer productState;

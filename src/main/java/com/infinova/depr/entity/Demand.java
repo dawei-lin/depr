@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @ApiModel("需求")
 public class Demand implements Serializable {
+    private static final long serialVersionUID = 1386697237209638496L;
     @ApiModelProperty("需求id")
     private String demandId;
     @ApiModelProperty("需求名字")

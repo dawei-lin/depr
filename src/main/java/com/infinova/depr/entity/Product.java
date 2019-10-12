@@ -14,6 +14,7 @@ import java.util.List;
  */
 @ApiModel("产品")
 public class Product implements Serializable {
+    private static final long serialVersionUID = -7949243755032293694L;
     @ApiModelProperty("产品id")
     private String productId;
     @ApiModelProperty("产品名称")

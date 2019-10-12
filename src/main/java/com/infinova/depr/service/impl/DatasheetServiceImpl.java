@@ -5,6 +5,7 @@ import com.infinova.depr.entity.Datasheet;
 import com.infinova.depr.service.DatasheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,7 +18,7 @@ public class DatasheetServiceImpl implements DatasheetService {
     private DatasheetDao datasheetDao;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class,propagation =Propagation.)
     public int saveDocUrl(Datasheet datasheet) {
         return datasheetDao.saveDocUrl(datasheet);
     }

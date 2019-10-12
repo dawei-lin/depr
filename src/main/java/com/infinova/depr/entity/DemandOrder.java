@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/7/23 16:46
  */
 public class DemandOrder implements Serializable {
+    private static final long serialVersionUID = 698038242802181767L;
     private String demandOrder;
     private String demandCategoryOrder;
 

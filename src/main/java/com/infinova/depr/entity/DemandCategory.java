@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @date 2019/7/20 14:57
  */
 public class DemandCategory implements Serializable {
+    private static final long serialVersionUID = 2137395729408760968L;
     private String demandCategoryId;
     @NotNull(message = "非空")
     @Size(min = 1, max = 200, message = "名字长度不符合")

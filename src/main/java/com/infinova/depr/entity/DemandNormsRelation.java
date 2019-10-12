@@ -8,6 +8,7 @@ import java.util.Objects;
  * @date 2019/9/5 15:34
  */
 public class DemandNormsRelation implements Serializable {
+    private static final long serialVersionUID = -1094455333453594773L;
     private String demandId;
     private String normsId;
 

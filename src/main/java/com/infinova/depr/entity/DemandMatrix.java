@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/13 17:16
  */
 public class DemandMatrix implements Serializable {
+    private static final long serialVersionUID = -7369358918167592113L;
     private Integer demandState;
     private Integer demandPriority;
     private String demandNum;

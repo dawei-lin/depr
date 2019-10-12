@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/15 16:46
  */
 public class ProjectParam extends BaseParam implements Serializable {
+    private static final long serialVersionUID = 8517450379701892229L;
     private String projectName;
     private Integer projectState;
     private Integer projectType;

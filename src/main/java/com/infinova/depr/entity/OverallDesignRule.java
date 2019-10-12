@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @date 2019/8/7 13:39
  */
 public class OverallDesignRule implements Serializable {
+    private static final long serialVersionUID = -6709785583178435252L;
     private String overallDesignRuleId;
     private String overallDesignRuleNum;
     private String overallDesignRuleName;
